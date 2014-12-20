@@ -6,10 +6,20 @@
 //  Copyright (c) 2014 vientapps. All rights reserved.
 //
 
+
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+NSMutableArray *Genres;
 
+@interface ViewController : UIViewController
+{
+   
+    
+}
+
+
+- (IBAction)NonFiction:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *NonFictionOutlet;
 
 @end
 

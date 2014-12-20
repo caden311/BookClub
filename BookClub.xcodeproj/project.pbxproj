@@ -14,6 +14,8 @@
 		AD1B948D1A44DB9500AB4449 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD1B948C1A44DB9500AB4449 /* Images.xcassets */; };
 		AD1B94901A44DB9500AB4449 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD1B948E1A44DB9500AB4449 /* LaunchScreen.xib */; };
 		AD1B949C1A44DB9600AB4449 /* BookClubTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1B949B1A44DB9600AB4449 /* BookClubTests.m */; };
+		ADD1AEC41A44E2380016669B /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD1AEC31A44E2380016669B /* TableViewController.m */; };
+		ADD1AEC71A44E8200016669B /* BookView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD1AEC61A44E8200016669B /* BookView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		AD1B94951A44DB9600AB4449 /* BookClubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookClubTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD1B949A1A44DB9600AB4449 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD1B949B1A44DB9600AB4449 /* BookClubTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookClubTests.m; sourceTree = "<group>"; };
+		ADD1AEC21A44E2380016669B /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		ADD1AEC31A44E2380016669B /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		ADD1AEC51A44E8200016669B /* BookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookView.h; sourceTree = "<group>"; };
+		ADD1AEC61A44E8200016669B /* BookView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +91,11 @@
 				AD1B94841A44DB9500AB4449 /* AppDelegate.m */,
 				AD1B94861A44DB9500AB4449 /* ViewController.h */,
 				AD1B94871A44DB9500AB4449 /* ViewController.m */,
+				ADD1AEC51A44E8200016669B /* BookView.h */,
+				ADD1AEC61A44E8200016669B /* BookView.m */,
 				AD1B94891A44DB9500AB4449 /* Main.storyboard */,
+				ADD1AEC21A44E2380016669B /* TableViewController.h */,
+				ADD1AEC31A44E2380016669B /* TableViewController.m */,
 				AD1B948C1A44DB9500AB4449 /* Images.xcassets */,
 				AD1B948E1A44DB9500AB4449 /* LaunchScreen.xib */,
 				AD1B947F1A44DB9500AB4449 /* Supporting Files */,
@@ -222,6 +232,8 @@
 				AD1B94881A44DB9500AB4449 /* ViewController.m in Sources */,
 				AD1B94851A44DB9500AB4449 /* AppDelegate.m in Sources */,
 				AD1B94821A44DB9500AB4449 /* main.m in Sources */,
+				ADD1AEC71A44E8200016669B /* BookView.m in Sources */,
+				ADD1AEC41A44E2380016669B /* TableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +426,7 @@
 				AD1B94A11A44DB9600AB4449 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AD1B94A21A44DB9600AB4449 /* Build configuration list for PBXNativeTarget "BookClubTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +435,7 @@
 				AD1B94A41A44DB9600AB4449 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

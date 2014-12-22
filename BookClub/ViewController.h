@@ -20,6 +20,8 @@ NSMutableArray *Genres;
 
 - (IBAction)NonFiction:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *NonFictionOutlet;
+- (IBAction)Fiction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *FictionOutlet;
 
 @end
 

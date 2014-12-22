@@ -16,7 +16,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _warningLabel.text=@"";
+    findRand=false;
+    
+    
+   
+    
     [self getRandomBook];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -28,23 +35,39 @@
 
 -(void)getRandomBook
 {
-    
-        [self downloadItems];
-        
+        if( [Genres count] <1)
+        {
+            _warningLabel.text=@"Please go back and select a genre(s)";
+        }
+        else if([Genres count]<2)
+        {
+            genreValue = Genres[0];
+            [self downloadItemsForOne:genreValue];
+        }
    // [self getBook];
     
 }
 
 
--(void)downloadItems
+-(void)downloadItemsForOne:(NSString *) val
 {
-    //NSString * username = self.uNameTextField.text;
-    NSString * query = [NSString stringWithFormat:@"http://24.10.161.128/BookClub/phpService/service.php?query=Select * from `Books` join `BookGenre` on Books.bookId=BookGenre.bookId where BookGenre.bookGenre='Fiction'"];
-    NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
-    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
-    [NSURLConnection connectionWithRequest:urlRequest delegate:self];
-    
+    if(findRand==false)
+    {
+        //NSString * username = self.uNameTextField.text;
+        NSString * query = [NSString stringWithFormat:@"http://24.10.161.128/BookClub/phpService/modifiedService.php?query=SELECT count(*) as cnt FROM Books JOIN BookGenre ON Books.bookId=BookGenre.bookId WHERE BookGenre.bookGenre='%@'",val];
+        NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
+        NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
+        [NSURLConnection connectionWithRequest:urlRequest delegate:self];
+    }
+    else
+    {
+        NSString * query = [NSString stringWithFormat:@"http://24.10.161.128/BookClub/phpService/modifiedService.php?query=SELECT * FROM Books JOIN BookGenre ON Books.bookId=BookGenre.bookId WHERE BookGenre.bookGenre='%@'& Limit 1 Offset %@",val, randRow];
+        NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
+        NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
+        [NSURLConnection connectionWithRequest:urlRequest delegate:self];
+    }
     
 }
 
@@ -65,53 +88,51 @@
     // Parse the JSON that came in
     NSError *error;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:downloadedData options:NSJSONReadingAllowFragments error:&error];
-    
-    
-    // Create an array to store the locations
-   // NSString *correctPassword;
-   // NSString *adminCode;
-    
-    
-    // Loop through Json objects, create question objects and add them to our questions array
-    for (int i = 0; i < jsonArray.count; i++)
+    if(findRand==false)
     {
-        NSDictionary *jsonElement = jsonArray[i];
-        NSString * book = jsonElement[@"bookName"];
+        NSDictionary *jsonElement =jsonArray[0];
+       
+        NSString * counter=jsonElement[@"cnt"];
         
-         NSLog(book);
-        //correctPassword = jsonElement[@"password"];
-       // adminCode = jsonElement[@"isAdmin"];
+        int random =[counter intValue];
+        
+        if(random>0)
+        {
+            int val =((arc4random()%random));
+            randRow=[NSNumber numberWithInt:val];
+        }
+        else
+        {
+            randRow=[NSNumber numberWithInt:random];
+        }
+     
+        
+      
+        findRand=true;
+       
+        [self getRandomBook];
         
     }
+    else
+    {
     
-
-    
-    // Ready to notify delegate that data is ready and pass back items
-}
-
-/*
--(void)getBook
-{
-
-    
-        NSString * query = [NSString stringWithFormat:@"http://24.10.161.128/BookClub/phpService/service.php?query=Select * from `Books` join `BookGenre` on Books.bookId=BookGenre.bookId where BookGenre.bookGenre='Nonfiction'"];
-        NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
-        NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
-        [NSURLConnection connectionWithRequest:urlRequest delegate:self];
-        _conn = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+        // Loop through Json objects, create question objects and add them to our questions array
+        for (int i = 0; i < jsonArray.count; i++)
+        {
+            NSDictionary *jsonElement = jsonArray[i];
+            _bookName.text = jsonElement[@"bookName"];
+            _Author.text = jsonElement[@"Author"];
+            _publishedDate.text=jsonElement[@"publishedDate"];
+            _Genres.text=jsonElement[@"bookGenre"];
+     
         
-        NSError *error;
-        NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:downloadedData options:NSJSONReadingAllowFragments error:&error];
-        NSDictionary *jsonElement2 = jsonArray[0];
+        }
     
-    NSString * book = [[NSString alloc] initWithString:jsonElement2[@"bookName"]];
+    }
     
-    
-    NSLog(book);
-
 }
-*/
+
+
 
 
 

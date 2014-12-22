@@ -11,13 +11,20 @@
 
 @interface BookView : UIViewController <NSURLConnectionDelegate>
 {
-bool validLogin;
-bool collectData;
+    bool findRand;
+   
 NSMutableData *downloadedData;
+    NSNumber * randRow;
+    NSString * genreValue;
 
 }
 
 @property (strong) NSURLConnection *conn;
+@property (weak, nonatomic) IBOutlet UILabel *bookName;
+@property (weak, nonatomic) IBOutlet UILabel *Author;
+@property (weak, nonatomic) IBOutlet UILabel *publishedDate;
+@property (weak, nonatomic) IBOutlet UILabel *Genres;
+@property (weak, nonatomic) IBOutlet UILabel *warningLabel;
 
 
     @end

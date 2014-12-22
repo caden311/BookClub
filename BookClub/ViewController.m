@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
      Genres = [[NSMutableArray alloc] init];
     
-    [self initGenresArray];
+    //[self initGenresArray];
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -31,8 +31,20 @@
 
 - (IBAction)NonFiction:(id)sender {
     
-    Genres[0]=[NSNumber numberWithInt:1];
- 
+    
+    NSString * value = [[NSString alloc] initWithFormat:@"Nonfiction"];
+    if(_NonFictionOutlet.alpha == 1&&[Genres count]<4)
+    {
+    _NonFictionOutlet.alpha=.3;
+
+    [Genres addObject:value];
+    }
+    else
+    {
+        _NonFictionOutlet.alpha=1;
+        [Genres removeObject:value];
+        
+    }
     
 }
 
@@ -42,9 +54,26 @@
     for(int i=0; i<10; i++)
     {
         
-        Genres [i]=[NSNumber numberWithInt:0];
+        [Genres insertObject:0 atIndex:i];
     
     }
     
+}
+- (IBAction)Fiction:(id)sender
+{
+    
+    NSString * value = [[NSString alloc] initWithFormat:@"Fiction"];
+    if(_FictionOutlet.alpha == 1&&[Genres count]<4)
+    {
+        _FictionOutlet.alpha=.3;
+        
+        [Genres addObject:value];
+    }
+    else
+    {
+        _FictionOutlet.alpha=1;
+        [Genres removeObject:value];
+        
+    }
 }
 @end
